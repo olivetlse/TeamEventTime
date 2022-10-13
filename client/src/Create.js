@@ -7,10 +7,11 @@ const Create = () => {
     const [state, setState] = useState({
         title: '',
         content: '',
+        contents: '',
         user: ''
     });
     // destructure values from state
-    const { title, content, user } = state;
+    const { title, content, contents, user } = state;
 
     // onchange event handler
     const handleChange = name => event => {
@@ -22,11 +23,11 @@ const Create = () => {
         event.preventDefault();
         // console.table({ title, content, user });
         axios
-            .post(`${process.env.REACT_APP_API}/post`, { title, content, user })
+            .post(`${process.env.REACT_APP_API}/post`, { title, content, contents, user })
             .then(response => {
                 console.log(response);
                 // empty state
-                setState({ ...state, title: '', content: '', user: '' });
+                setState({ ...state, title: '', content: '', contents: '', user: '' });
                 // show sucess alert
                 alert(`Post titled ${response.data.title} is created`);
             })
@@ -52,7 +53,7 @@ const Create = () => {
                     </div>
 
 
-                    <input
+                    <textarea
                         onChange={handleChange('title')}
                         value={title}
                         type="text"
@@ -82,9 +83,9 @@ const Create = () => {
                     <button onclick="isConfirm(true)">Oui</button>
                     <button onclick="isConfirm(false)">Non</button> 
                     </div>
-                    <input
-                        onChange={handleChange('user')}
-                        value={user}
+                    <textarea
+                        onChange={handleChange('contents')}
+                        value={contents}
                         type="text"
                         className="form-control"
                         placeholder="Veillez fournir plus de détails si vous le souhaitez..."

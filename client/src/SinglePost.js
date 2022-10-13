@@ -18,6 +18,7 @@ const SinglePost = props => {
             <br />
             <h1>{post.title}</h1>
             <p className="lead">{post.content}</p>
+            <p className="lead">{post.contents}</p>
             <p>
                 Author <span className="badge">{post.user}</span> Published on{' '}
                 <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>

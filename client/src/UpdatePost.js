@@ -6,17 +6,18 @@ const UpdatePost = props => {
     const [state, setState] = useState({
         title: '',
         content: '',
+        contents: '',
         slug: '',
         user: ''
     });
-    const { title, content, slug, user } = state;
+    const { title, content, contents, slug, user } = state;
 
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_API}/post/${props.match.params.slug}`)
             .then(response => {
-                const { title, content, slug, user } = response.data;
-                setState({ ...state, title, content, slug, user });
+                const { title, content, contents, slug, user } = response.data;
+                setState({ ...state, title, content, contents, slug, user });
             })
             .catch(error => alert('Error loading single post'));
     }, []);
@@ -31,12 +32,12 @@ const UpdatePost = props => {
         event.preventDefault();
         // console.table({ title, content, user });
         axios
-            .put(`${process.env.REACT_APP_API}/post/${slug}`, { title, content, user })
+            .put(`${process.env.REACT_APP_API}/post/${slug}`, { title, content, contents, user })
             .then(response => {
                 console.log(response);
-                const { title, content, slug, user } = response.data;
+                const { title, content, content1, slug, user } = response.data;
                 // empty state
-                setState({ ...state, title, content, slug, user });
+                setState({ ...state, title, content, contents, slug, user });
                 // show sucess alert
                 alert(`Post titled ${title} is updated`);
             })
@@ -64,6 +65,17 @@ const UpdatePost = props => {
                 <textarea
                     onChange={handleChange('content')}
                     value={content}
+                    type="text"
+                    className="form-control"
+                    placeholder="Write something.."
+                    required
+                />
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Contents</label>
+                <textarea
+                    onChange={handleChange('contents')}
+                    value={contents}
                     type="text"
                     className="form-control"
                     placeholder="Write something.."

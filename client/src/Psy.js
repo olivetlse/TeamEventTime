@@ -3,7 +3,7 @@ import Nav from './Nav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const App = () => {
+const Psy = () => {
     const [posts, setPosts] = useState([]);
 
     const fetchPosts = () => {
@@ -51,12 +51,13 @@ const App = () => {
                             <div className="col-md-10">
                                 <p className="lead">{post.title}</p>
                                 <p className="lead">{post.content.substring(0, 100)}</p>
+                                <p>
+                                    Author <span className="badge">{post.user}</span> Published on{' '}
+                                    <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>
+                                </p>
                             </div>
 
                             <div className="col-md-2">
-                                <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-outline-warning">
-                                    Update
-                                </Link>
                                 <button
                                     onClick={() => deleteConfirm(post.slug)}
                                     className="btn btn-sm btn-outline-danger ml-1"
@@ -72,4 +73,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Psy;
